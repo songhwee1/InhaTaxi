@@ -10,4 +10,13 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="idText">아이디</string>
+    <string name="pwText">비밀번호</string>
+    <string name="idDes">아이디</string>
+    <string name="pwDes">비밀번호</string>
+    <string name="btnLogin">로그인</string>
+    <string name="btnJoin">회원가입</string>
+    <string name="lat">현재 위도값</string>
+    <string name="lon">현재 경도값</string>
 </resources>

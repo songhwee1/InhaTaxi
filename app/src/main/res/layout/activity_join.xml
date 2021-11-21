@@ -1,0 +1,73 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/idText"
+        android:text="@string/idText"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/pwText" />
+
+
+    <TextView
+        android:id="@+id/pwText"
+        android:text="@string/pwText"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/idText"
+        />
+
+    <EditText
+        android:id="@+id/pwEditText"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+
+        android:contentDescription="@string/pwDes"
+        android:layout_alignTop="@+id/pwText"
+        android:layout_toEndOf="@+id/pwText"
+        android:layout_alignBottom="@+id/pwText"
+        android:layout_alignParentEnd="true"
+        tools:ignore="LabelFor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pwText"
+        >
+
+        <Button
+            android:id="@+id/btnJoin"
+            android:text="@string/btnJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:ignore="ButtonStyle" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/idEditText"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+
+        android:contentDescription="@string/idDes"
+        android:layout_alignTop="@+id/idText"
+        android:layout_alignBottom="@+id/idText"
+        android:layout_toEndOf="@+id/idText"
+        android:layout_alignParentEnd="true"
+        />
+</RelativeLayout>
