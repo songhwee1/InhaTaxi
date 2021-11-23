@@ -19,4 +19,5 @@
     <string name="btnJoin">회원가입</string>
     <string name="lat">현재 위도값</string>
     <string name="lon">현재 경도값</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
