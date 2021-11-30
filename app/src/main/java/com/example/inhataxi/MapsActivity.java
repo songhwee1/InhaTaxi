@@ -56,9 +56,7 @@ public class MapsActivity extends AppCompatActivity implements TMapGpsManager.on
         tMapGPS.setMinDistance(10);
         tMapGPS.setProvider(tMapGPS.NETWORK_PROVIDER);
         tMapGPS.setProvider(tMapGPS.GPS_PROVIDER);
-
         tMapGPS.OpenGps();
-
     }
 
     @Override
