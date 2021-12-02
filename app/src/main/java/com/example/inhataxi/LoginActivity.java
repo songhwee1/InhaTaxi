@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         // Button components
         Button DoLogin = (Button) findViewById(R.id.btnDoLogin);
         Button GoRegister = (Button) findViewById(R.id.btnGoRegister);
+        Button GoRegister2 = (Button) findViewById(R.id.btnGoRegister2);
 
 
         // Hwi
@@ -64,6 +65,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, JoinActivity.class));
+                finish();
+            }
+        });
+
+        GoRegister2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, DriverJoinActivity.class));
                 finish();
             }
         });

@@ -174,8 +174,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 mDatabase.child("res").push().setValue(result);
 
-                Intent intent = new Intent(MapActivity.this, DriverWatingActivity.class);
-                intent.putExtra("phone",phone);
+                Intent intent = new Intent(MapActivity.this, DriverWaitingActivity.class);
+                intent.putExtra("end", editText.getText().toString());
+                intent.putExtra("phone", phone);
+                intent.putExtra("start", "인하공업전문대학 7호관");
+                intent.putExtra("status", "wait");
                 startActivity(intent);
                 finish();
             }

@@ -35,6 +35,24 @@
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:text=" 차량 번호"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        />
+    <EditText
+        android:id="@+id/edtCarNum"
+        android:hint="차량 번호(ex) 01가2345)"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:textCursorDrawable="@color/black"/>
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:text=" Phone"
         android:textSize="15dp"
         android:layout_gravity="center"
@@ -48,6 +66,7 @@
         android:layout_gravity="center"
         android:backgroundTint="@color/black"
         android:textCursorDrawable="@color/black"/>
+
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="300dp"

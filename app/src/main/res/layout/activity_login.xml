@@ -46,8 +46,17 @@
         android:layout_height="55dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="Regitster"
+        android:text="가입하기 - 승객"
         android:textSize="15dp"
         android:textStyle="bold"/>
 
+    <Button
+        android:id="@+id/btnGoRegister2"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="가입하기 - 기사"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 </LinearLayout>

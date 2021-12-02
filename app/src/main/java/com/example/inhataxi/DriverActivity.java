@@ -25,10 +25,13 @@ public class DriverActivity extends AppCompatActivity {
 
     ListView mListView_res;
     ListView mListView_on;
+    ListView mListView_come;
     ArrayList<SampleData> list_1;
     ArrayList<SampleData> list_2;
+    ArrayList<SampleData> list_3;
     MyAdapter myAdapter_1;
     MyAdapter myAdapter_2;
+    MyAdapter myAdapter_3;
     String phone, start, end;
     private DatabaseReference mDatabase;
 
@@ -42,15 +45,19 @@ public class DriverActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         this.waitList();
+        this.comeList();
         this.rideList();
 
         mListView_res = (ListView)findViewById(R.id.listView1);
-        mListView_on  = (ListView)findViewById(R.id.listView2);
+        mListView_come = (ListView)findViewById(R.id.listView2);
+        mListView_on  = (ListView)findViewById(R.id.listView3);
 
         myAdapter_1 = new MyAdapter(this, list_1);
         myAdapter_2 = new MyAdapter(this, list_2);
+        myAdapter_3 = new MyAdapter(this, list_3);
         mListView_res.setAdapter(myAdapter_1);
-        mListView_on.setAdapter(myAdapter_2);
+        mListView_come.setAdapter(myAdapter_2);
+        mListView_on.setAdapter(myAdapter_3);
         // Hwi
         // 승차처리
         SwipeDismissListViewTouchListener touchListener_1 =
@@ -65,14 +72,32 @@ public class DriverActivity extends AppCompatActivity {
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
                                     //insertStatus(myAdapter_1.getItem(position),"ride");
-                                    changeStatus(myAdapter_1.getItem(position),"ride");
+                                    changeStatus(myAdapter_1.getItem(position),"come");
+
+                                }
+                            }
+                        });
+        // 승차처리
+        SwipeDismissListViewTouchListener touchListener_2 =
+                new SwipeDismissListViewTouchListener(mListView_come,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    //insertStatus(myAdapter_1.getItem(position),"ride");
+                                    changeStatus(myAdapter_2.getItem(position),"ride");
 
                                 }
                             }
                         });
         // Hwi
         // 하차처리
-        SwipeDismissListViewTouchListener touchListener_2=
+        SwipeDismissListViewTouchListener touchListener_3=
                 new SwipeDismissListViewTouchListener(mListView_on,
                         new SwipeDismissListViewTouchListener.DismissCallbacks() {
                             @Override
@@ -83,15 +108,17 @@ public class DriverActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    changeStatus(myAdapter_2.getItem(position),"out");
+                                    changeStatus(myAdapter_3.getItem(position),"out");
                                 }
                             }
                         });
 
         mListView_res.setOnTouchListener(touchListener_1);
         mListView_res.setOnScrollListener(touchListener_1.makeScrollListener());
-        mListView_on.setOnTouchListener(touchListener_2);
-        mListView_on.setOnScrollListener(touchListener_2.makeScrollListener());
+        mListView_come.setOnTouchListener(touchListener_2);
+        mListView_come.setOnScrollListener(touchListener_2.makeScrollListener());
+        mListView_on.setOnTouchListener(touchListener_3);
+        mListView_on.setOnScrollListener(touchListener_3.makeScrollListener());
     }
 
 /*
@@ -168,12 +195,12 @@ public class DriverActivity extends AppCompatActivity {
         });
     }
 
-    // Ride List
-    public void rideList(){
+    // Come List
+    public void comeList(){
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        Query query = reference.child("res").orderByChild("status").equalTo("ride");
+        Query query = reference.child("res").orderByChild("status").equalTo("come");
         list_2 = new ArrayList<SampleData>();
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -194,6 +221,42 @@ public class DriverActivity extends AppCompatActivity {
 
                     }
                 }myAdapter_2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    // Ride List
+    public void rideList(){
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        Query query = reference.child("res").orderByChild("status").equalTo("ride");
+        list_3 = new ArrayList<SampleData>();
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list_3.clear();
+                if(snapshot.exists()){
+                    for(DataSnapshot issue : snapshot.getChildren()){
+
+                        String start = issue.child("start").getValue().toString();
+                        String end = issue.child("end").getValue().toString();
+                        String phone = issue.child("phone").getValue().toString();
+
+                        Log.i("RETURN VALUE NAME : ", start);
+                        Log.i("RETURN VALUE NAME : ", end);
+                        Log.i("RETURN VALUE NAME : ", phone);
+
+                        list_3.add(new SampleData(start,end,phone));
+
+                    }
+                }myAdapter_3.notifyDataSetChanged();
             }
 
             @Override

@@ -1,6 +1,5 @@
 package com.example.inhataxi;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import static android.content.ContentValues.TAG;
-public class DriverWatingActivity extends AppCompatActivity {
+public class DriverWaitingActivity extends AppCompatActivity {
 
     Button doCancel;
 
@@ -46,26 +45,23 @@ public class DriverWatingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        //jh
-        TextView txtBus = (TextView) findViewById(R.id.txtBus);
+
         TextView txtDepart = (TextView) findViewById(R.id.txtDepart);
         TextView txtArrive = (TextView) findViewById(R.id.txtArrive);
 
         //ReservationActivity.java에서 보낸 변수로 바꿔주기
-        String bus = intent.getStringExtra("bus");
-        String depart = intent.getStringExtra("depart");
-        String arrive = intent.getStringExtra("arrive");
+        String depart = intent.getStringExtra("start");
+        String arrive = intent.getStringExtra("end");
 
-        txtBus.setText(bus);
         txtDepart.setText(depart);
         txtArrive.setText(arrive);
 
-        rideStatusChange(bus , depart, arrive);
+        rideStatusChange( depart, arrive);
 
         // Minjae
         // dialog
 
-        cancelDialog = new Dialog(DriverWatingActivity.this);
+        cancelDialog = new Dialog(DriverWaitingActivity.this);
         cancelDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         cancelDialog.setContentView(R.layout.activity_dialog_cancel);
 
@@ -126,7 +122,7 @@ public class DriverWatingActivity extends AppCompatActivity {
         });
     }
 
-    private void rideStatusChange(String bus, String depart, String arrive) {
+    private void rideStatusChange(String depart, String arrive) {
         phone = mAuth.getCurrentUser().getEmail();
         phone = phone.substring(0, 11);
         Log.i("NOW PHONE : ", phone);
@@ -142,9 +138,8 @@ public class DriverWatingActivity extends AppCompatActivity {
                     Log.d("rsc","hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh1323513");
 
                     Log.i("keyssssss", issue.child("status").getValue().toString());
-                    if(issue.child("status").getValue().toString().equals("ride")){
-                        Intent intent = new Intent(DriverWatingActivity.this, RidingMapActivity.class);
-                        intent.putExtra("busnum", bus);
+                    if(issue.child("status").getValue().toString().equals("come")){
+                        Intent intent = new Intent(DriverWaitingActivity.this, DriverComingActivity.class);
                         intent.putExtra("depart", depart);
                         intent.putExtra("arrive", arrive);
                         startActivity(intent);

@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
-
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,8 +34,7 @@ import java.util.HashMap;
 
 import static android.content.ContentValues.TAG;
 
-public class JoinActivity extends AppCompatActivity {
-
+public class DriverJoinActivity extends AppCompatActivity {
     // Hwi
     // initialize DB
     DatabaseReference mDatabase;
@@ -64,6 +61,7 @@ public class JoinActivity extends AppCompatActivity {
         // EditText components
         final EditText name = (EditText) findViewById(R.id.edtUserName);
         final EditText phone = (EditText) findViewById(R.id.edtUserPhone);
+        final EditText carNum = (EditText) findViewById(R.id.edtCarNum);
 
         // Hwi
         // Image components
@@ -79,11 +77,14 @@ public class JoinActivity extends AppCompatActivity {
                 // Convert EditText to String
                 String get_name= name.getText().toString();
                 get_phone= phone.getText().toString();
+                String get_carNum = carNum.getText().toString();
 
                 // Send UserData to DB
                 HashMap result = new HashMap<>();
                 result.put("name", get_name);
                 result.put("phone", get_phone);
+                result.put("carNum",get_carNum);
+
 
                 // Hwi
                 // firebase 정의
@@ -92,7 +93,7 @@ public class JoinActivity extends AppCompatActivity {
                 uploadFile();
                 // Hwi
                 // Make Toast
-                Toast.makeText(JoinActivity.this, "I'll let you know after the administrator approves it.",
+                Toast.makeText(DriverJoinActivity.this, "I'll let you know after the administrator approves it.",
                         Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -185,4 +186,3 @@ public class JoinActivity extends AppCompatActivity {
         }
     }
 }
-
