@@ -38,7 +38,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -163,8 +162,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         CallTaxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = getIntent();
-                String phone =intent2.getStringExtra("phone");
+                Intent intentPhone = getIntent();
+                String phone =intentPhone.getStringExtra("phone");
+                phone = phone.substring(0, 11);
+                Log.d("phone",phone);
+                HashMap result = new HashMap<>();
+                result.put("end", editText.getText().toString());
+                result.put("phone", phone);
+                result.put("start", "인하공업전문대학 7호관");
+                result.put("status", "wait");
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("res").push().setValue(result);
 
                 Intent intent = new Intent(MapActivity.this, DriverWatingActivity.class);
                 intent.putExtra("phone",phone);
@@ -207,17 +215,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             url = "https://apis.openapi.sk.com/tmap/routes?version=1&callback=result&appKey=" + appKey
                     + "&startX=" + startX + "&startY=" + startY + "&endX=" + endX + "&endY=" + endY
                     + "&startName=" + startName + "&endName=" + endName;
-            Intent intent = getIntent();
-            String phone =intent.getStringExtra("phone");
-            phone = phone.substring(0, 11);
-            Log.d("phone",phone);
-            HashMap result = new HashMap<>();
-            result.put("end", URLDecoder.decode(endName,"UTF-8");
-            result.put("phone", phone);
-            result.put("start", startName);
-            result.put("status", "wait");
-            mDatabase = FirebaseDatabase.getInstance().getReference();
-            mDatabase.child("res").push().setValue(result);
 
 
 
