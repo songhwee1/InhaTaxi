@@ -1,73 +1,95 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/idText"
-        android:text="@string/idText"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/pwText" />
-
-
-    <TextView
-        android:id="@+id/pwText"
-        android:text="@string/pwText"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/idText"
-        />
-
-    <EditText
-        android:id="@+id/pwEditText"
-        android:text=""
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-
-        android:contentDescription="@string/pwDes"
-        android:layout_alignTop="@+id/pwText"
-        android:layout_toEndOf="@+id/pwText"
-        android:layout_alignBottom="@+id/pwText"
-        android:layout_alignParentEnd="true"
-        tools:ignore="LabelFor" />
-
-    <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pwText"
-        >
-
-        <Button
-            android:id="@+id/btnJoin"
-            android:text="@string/btnJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:ignore="ButtonStyle" />
-
-    </LinearLayout>
+        android:text=" Name"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        />
 
     <EditText
-        android:id="@+id/idEditText"
-        android:text=""
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:id="@+id/edtUserName"
+        android:hint="Name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:textCursorDrawable="@color/black"/>
 
-        android:contentDescription="@string/idDes"
-        android:layout_alignTop="@+id/idText"
-        android:layout_alignBottom="@+id/idText"
-        android:layout_toEndOf="@+id/idText"
-        android:layout_alignParentEnd="true"
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text=" Birth"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         />
-</RelativeLayout>
+    <EditText
+        android:id="@+id/edtUserBirth"
+        android:hint="Birth ( ex) 971201 )"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:textCursorDrawable="@color/black"/>
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text=" Phone"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/edtUserPhone"
+        android:hint="Phone (Please enter without '-')"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:textCursorDrawable="@color/black"/>
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="Attach proof documents"
+        android:textCursorDrawable="@color/black"/>
+
+    <ImageView
+        android:id="@+id/iv_preview"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/btnDoRegister"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Register"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+
+
+
+</LinearLayout>

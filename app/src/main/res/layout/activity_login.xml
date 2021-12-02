@@ -1,80 +1,53 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/idText"
-        android:text="@string/idText"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/pwText" />
-
-
-    <TextView
-        android:id="@+id/pwText"
-        android:text="@string/pwText"
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_below="@+id/idText"
-        />
-
-    <EditText
-        android:id="@+id/pwEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/pwText"
-        android:layout_alignBottom="@+id/pwText"
-        android:layout_alignParentEnd="true"
-
-        android:layout_toEndOf="@+id/pwText"
-        android:contentDescription="@string/pwDes"
-        android:inputType="textPassword"
-        android:text=""
-        android:textSize="15sp"
-        tools:ignore="LabelFor" />
-
-    <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+
+    <TextView
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pwText"
-        >
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:text="@string/btnLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:ignore="ButtonStyle" />
-
-        <Button
-            android:id="@+id/btnJoin"
-            android:text="@string/btnJoin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:ignore="ButtonStyle" />
-
-    </LinearLayout>
-
+        android:text=" Phone"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        />
     <EditText
-        android:id="@+id/idEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/idText"
-        android:layout_alignBottom="@+id/idText"
-        android:layout_alignParentEnd="true"
+        android:id="@+id/edtUserPhone"
+        android:hint="Phone (Please enter without '-')"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:textCursorDrawable="@color/black"/>
+    <Button
+        android:id="@+id/btnDoLogin"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Login"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/btnGoRegister"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Regitster"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
-        android:layout_toEndOf="@+id/idText"
-        android:contentDescription="@string/idDes"
-        android:inputType="textPersonName"
-        android:text=""
-        android:textSize="15sp" />
-</RelativeLayout>
+</LinearLayout>

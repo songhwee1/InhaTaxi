@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "134991041400",
+    "firebase_url": "https://anywhere-6df10-default-rtdb.firebaseio.com",
+    "project_id": "anywhere-6df10",
+    "storage_bucket": "anywhere-6df10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134991041400:android:56894b93098e666839ee8d",
+        "android_client_info": {
+          "package_name": "com.example.inhataxi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKTF-UIBBK2A1Rgx-Yz7l_RAURibtx1PQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134991041400:android:21f29ba74aed925639ee8d",
+        "android_client_info": {
+          "package_name": "com.inhatc.anywhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKTF-UIBBK2A1Rgx-Yz7l_RAURibtx1PQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134991041400:android:c2c635cfa1d68cde39ee8d",
+        "android_client_info": {
+          "package_name": "com.inhatc.anywhere_driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKTF-UIBBK2A1Rgx-Yz7l_RAURibtx1PQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

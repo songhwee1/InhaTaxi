@@ -2,6 +2,7 @@ package com.example.inhataxi;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -50,7 +51,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Geocoder geocoder;
     EditText editText;
     Button Button;
-    Button Button2;
+    Button CallTaxi;
 
 
 
@@ -61,6 +62,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         editText = findViewById(R.id.editText);
         Button = findViewById(R.id.button);
+        CallTaxi = findViewById(R.id.callTaxi);
 
         //지도 사용권한을 받아 온다.
         locationSource =
@@ -149,6 +151,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 //맵 검색을 비동기식을 처리한다.
                 MapSearchTask mapSearchTask = new MapSearchTask();
                 mapSearchTask.execute();
+            }
+        });
+        CallTaxi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MapActivity.this, CallWaitingActivity.class));
+                finish();
             }
         });
     }
