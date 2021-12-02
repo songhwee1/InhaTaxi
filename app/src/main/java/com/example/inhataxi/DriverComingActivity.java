@@ -1,4 +1,6 @@
 package com.example.inhataxi;
 
-public class DriverComingActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class DriverComingActivity extends AppCompatActivity {
 }

@@ -171,6 +171,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 result.put("phone", phone);
                 result.put("start", "인하공업전문대학 7호관");
                 result.put("status", "wait");
+                result.put("carNo","00가0000");
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 mDatabase.child("res").push().setValue(result);
 

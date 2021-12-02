@@ -51,7 +51,7 @@ public class DriverJoinActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_join);
+        setContentView(R.layout.activity_driverjoin);
 
         // Hwi
         // Button components
@@ -77,19 +77,19 @@ public class DriverJoinActivity extends AppCompatActivity {
                 // Convert EditText to String
                 String get_name= name.getText().toString();
                 get_phone= phone.getText().toString();
-                String get_carNum = carNum.getText().toString();
+                String get_carNo = carNum.getText().toString();
 
                 // Send UserData to DB
                 HashMap result = new HashMap<>();
                 result.put("name", get_name);
                 result.put("phone", get_phone);
-                result.put("carNum",get_carNum);
+                result.put("carNo",get_carNo);
 
 
                 // Hwi
                 // firebase 정의
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("test").child("subtest").push().setValue(result);
+                mDatabase.child("user").push().setValue(result);
                 uploadFile();
                 // Hwi
                 // Make Toast

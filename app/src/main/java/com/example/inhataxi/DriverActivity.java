@@ -10,6 +10,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +35,8 @@ public class DriverActivity extends AppCompatActivity {
     MyAdapter myAdapter_3;
     String phone, start, end;
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -59,7 +62,7 @@ public class DriverActivity extends AppCompatActivity {
         mListView_come.setAdapter(myAdapter_2);
         mListView_on.setAdapter(myAdapter_3);
         // Hwi
-        // 승차처리
+        // 오는중
         SwipeDismissListViewTouchListener touchListener_1 =
                 new SwipeDismissListViewTouchListener(mListView_res,
                         new SwipeDismissListViewTouchListener.DismissCallbacks() {
@@ -108,7 +111,7 @@ public class DriverActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    changeStatus(myAdapter_3.getItem(position),"out");
+                                    deleteStatus(myAdapter_3.getItem(position));
                                 }
                             }
                         });
@@ -137,7 +140,12 @@ public class DriverActivity extends AppCompatActivity {
         mDatabase.child(status).push().setValue(result);
     }
  */
-
+    private String getCarNo(){
+        phone = mAuth.getCurrentUser().getEmail();
+        phone = phone.substring(0,11);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        return ref.child("user").orderByChild("phone").equalTo(phone).getRef().child("carNo").toString();
+    }
     private void changeStatus(SampleData data, String status){
         phone = data.getPhone();
         start = data.getStart();
@@ -151,6 +159,7 @@ public class DriverActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
                     appleSnapshot.getRef().child("status").setValue(status);
+                    appleSnapshot.getRef().child("carNo").setValue(getCarNo());
                 }
             }
 
@@ -160,6 +169,30 @@ public class DriverActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void deleteStatus(SampleData data){
+        phone = data.getPhone();
+        start = data.getStart();
+        end = data.getEnd();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query query = ref.child("res").orderByChild("phone").equalTo(phone);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                    appleSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
     // Wait List
     public void waitList(){
 
