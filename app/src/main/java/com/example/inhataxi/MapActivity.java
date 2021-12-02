@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
@@ -34,8 +38,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -52,7 +58,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     EditText editText;
     Button Button;
     Button CallTaxi;
-
+    private FirebaseAuth mAuth;
+    DatabaseReference mDatabase;
 
 
     @Override
@@ -156,7 +163,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         CallTaxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MapActivity.this, CallWaitingActivity.class));
+                Intent intent2 = getIntent();
+                String phone =intent2.getStringExtra("phone");
+
+                Intent intent = new Intent(MapActivity.this, DriverWatingActivity.class);
+                intent.putExtra("phone",phone);
+                startActivity(intent);
                 finish();
             }
         });
@@ -195,6 +207,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             url = "https://apis.openapi.sk.com/tmap/routes?version=1&callback=result&appKey=" + appKey
                     + "&startX=" + startX + "&startY=" + startY + "&endX=" + endX + "&endY=" + endY
                     + "&startName=" + startName + "&endName=" + endName;
+            Intent intent = getIntent();
+            String phone =intent.getStringExtra("phone");
+            phone = phone.substring(0, 11);
+            Log.d("phone",phone);
+            HashMap result = new HashMap<>();
+            result.put("end", URLDecoder.decode(endName,"UTF-8");
+            result.put("phone", phone);
+            result.put("start", startName);
+            result.put("status", "wait");
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("res").push().setValue(result);
+
 
 
         } catch ( UnsupportedEncodingException e) {

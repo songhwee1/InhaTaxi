@@ -93,7 +93,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Login Success! - 승객",
                                     Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MapActivity.class));
+                            Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+                            intent.putExtra("phone",phone1);
+                            startActivity(intent);
+
                             finish();
                         } else {
                             driverSignin();

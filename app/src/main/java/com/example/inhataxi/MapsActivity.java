@@ -40,12 +40,12 @@ public class MapsActivity extends AppCompatActivity implements TMapGpsManager.on
         tMapView.setLanguage(TMapView.LANGUAGE_KOREAN);
 
         // T Map View Using Linear Layout
-        LinearLayout linearLayoutTmap = (LinearLayout)findViewById(R.id.linearLayoutTmap);
+        LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.linearLayoutTmap);
         linearLayoutTmap.addView(tMapView);
 
         // Request For GPS permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
         // GPS using T Map
