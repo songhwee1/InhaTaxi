@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Reservation Information"
-        android:textSize="30dp"
+        android:background="#FFED577B"
         android:gravity="center"
+        android:text="기사정보"
         android:textColor="@color/white"
-        android:background="#F6BD60" />
+        android:textSize="30dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,14 +31,6 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textSize="30dp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plattform"
-        android:textSize="25dp"
-        android:textColor="#7f7f7f"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp" />
 
     <TextView
         android:id="@+id/txtDepart"
@@ -46,15 +39,6 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
-        android:textSize="25dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Platform"
-        android:textColor="#7f7f7f"
         android:textSize="25dp" />
 
     <TextView
@@ -90,8 +74,8 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:backgroundTint="@color/purple_200"
-            android:text="Cancel"/>
+            android:backgroundTint="#ED577B"
+            android:text="호출 취소" />
 
     </LinearLayout>
 </LinearLayout>

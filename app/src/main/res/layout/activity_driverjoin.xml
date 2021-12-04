@@ -7,30 +7,30 @@
     android:orientation="vertical">
 
     <TextView
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="Register"
+        android:background="#FFED577B"
+        android:gravity="center"
+        android:text="기사 회원가입"
         android:textColor="@color/white"
         android:textSize="30dp" />
 
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text=" Name"
-        android:textSize="15dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        />
+        android:text="성함"
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/edtUserName"
-        android:hint="Name"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/black"
-        android:textCursorDrawable="@color/black"/>
+        android:hint="(ex)홍길동"
+        android:textCursorDrawable="@color/black" />
 
     <TextView
         android:layout_width="300dp"
@@ -53,27 +53,29 @@
     <TextView
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text=" Phone"
-        android:textSize="15dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:text="휴대폰 번호"
+        android:textSize="15dp" />
 
     <EditText
         android:id="@+id/edtUserPhone"
-        android:hint="Phone (Please enter without '-')"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/black"
-        android:textCursorDrawable="@color/black"/>
+        android:hint="(ex) 01012345678"
+        android:textCursorDrawable="@color/black" />
 
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:text="Attach proof documents"
-        android:textCursorDrawable="@color/black"/>
+        android:backgroundTint="#8E8E8E"
+
+        android:text="택시운전자격증 첨부"
+        android:textCursorDrawable="@color/black" />
 
     <ImageView
         android:id="@+id/iv_preview"
@@ -81,15 +83,17 @@
         android:layout_height="100dp"
         android:layout_gravity="center"
         />
+
     <Button
         android:id="@+id/btnDoRegister"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="Register"
+        android:backgroundTint="#ED577B"
+        android:text="회원가입"
         android:textSize="15dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
 

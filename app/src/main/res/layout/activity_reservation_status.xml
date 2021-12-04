@@ -17,10 +17,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reservation Status"
-            android:background="#F6BD60"
-            android:textColor="@color/white"
+            android:background="#FFED577B"
+            android:text="호출대기콜"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="20dp" />"
 
         <ListView
@@ -39,10 +39,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="태우러가는중"
-            android:background="#F6BD60"
-            android:textColor="@color/white"
+            android:background="#FFED577B"
+            android:text="승객 출발지로 이동"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="20dp" />"
 
         <ListView
@@ -61,10 +61,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Drop off"
-            android:background="#F6BD60"
-            android:textColor="@color/white"
+            android:background="#FFED577B"
+            android:text="승객 하차"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="20dp" />
 
         <ListView
