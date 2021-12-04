@@ -71,7 +71,8 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
         editText = findViewById(R.id.editText);
         Button = findViewById(R.id.button);
         CallTaxi = findViewById(R.id.callTaxi);
-
+        mAuth = FirebaseAuth.getInstance();
+        rideStatusChange();
         //지도 사용권한을 받아 온다.
         locationSource =
                 new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
@@ -84,7 +85,7 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
             mapFragment = MapFragment.newInstance();
             fragmentManager.beginTransaction().add(R.id.ridingmap, mapFragment).commit();
         }
-        rideStatusChange();
+
         //getMapAsync를 호출하여 비동기로 onMapReady콜백 메서드 호출
         //onMapReady에서 NaverMap객체를 받음
         mapFragment.getMapAsync(this);
