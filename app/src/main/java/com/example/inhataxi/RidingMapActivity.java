@@ -8,6 +8,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +19,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.CameraUpdate;
@@ -73,17 +79,64 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        MapFragment mapFragment= (MapFragment) fragmentManager.findFragmentById(R.id.map);
+        MapFragment mapFragment= (MapFragment) fragmentManager.findFragmentById(R.id.ridingmap);
 
         if(mapFragment==null){
             mapFragment = MapFragment.newInstance();
-            fragmentManager.beginTransaction().add(R.id.map, mapFragment).commit();
+            fragmentManager.beginTransaction().add(R.id.ridingmap, mapFragment).commit();
         }
         //getMapAsync를 호출하여 비동기로 onMapReady콜백 메서드 호출
         //onMapReady에서 NaverMap객체를 받음
         mapFragment.getMapAsync(this);
         MapSearchTask mapSearchTask = new MapSearchTask();
         mapSearchTask.execute();
+    }
+    private void rideStatusChange() {
+        String phone = mAuth.getCurrentUser().getEmail();
+        phone = phone.substring(0, 11);
+        Log.i("NOW PHONE : ", phone);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        Log.d("rsc","start log");
+        Query query = reference.child("res").orderByChild("phone").equalTo(phone);
+        String finalPhone = phone;
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot issue : snapshot.getChildren()) {
+
+                    Log.i("keyssssss", issue.child("status").getValue().toString());
+                    if(issue.child("status").getValue().toString().equals("ride")){
+                        Intent intent = new Intent(RidingMapActivity.this, ReviewActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+//                    Query query_status = issue.getRef().child("status").equalTo("wait");
+//                    query_status.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot issue : snapshot.getChildren()) {
+//                                Log.d("rsc","hhhhhhhhh");
+//                                Intent intent = new Intent(MyPageActivity.this, MyPageRideActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -198,47 +251,28 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
 
     //맵검색을 비동기 식으로 처리한다.
     public class MapSearchTask extends AsyncTask<Void, Void, String>{
-        String str=editText.getText().toString();
+        String str="인하대역";
         List<Address> addressList = null;
+
 
         @Override
         protected String doInBackground(Void... voids) {
 
-            try {
-                // editText에 입력한 텍스트(주소, 지역, 장소 등)을 지오 코딩을 이용해 변환
-                addressList = geocoder.getFromLocationName(
-                        str, // 검색키워드
-                        10); // 최대 검색 결과 개수
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.out.println(addressList.get(0).toString());
-            // 콤마를 기준으로 split
-            String []splitStr = addressList.get(0).toString().split(",");
-            String address = splitStr[0].substring(splitStr[0].indexOf("\"") + 1,splitStr[0].length() - 2); // 주소
-            System.out.println(address);
-
-            String latitude = splitStr[10].substring(splitStr[10].indexOf("=") + 1); // 위도
-            String longitude = splitStr[12].substring(splitStr[12].indexOf("=") + 1); // 경도
-            System.out.println(latitude);
-            System.out.println(longitude);
-
-            String result = latitude+","+longitude;
+            String result = "37.44831032092448"+","+"126.65004667134748";
 
             return result;
         }
 
-        @Override
+
+            @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
 
             String[] latlong = result.split(",");
 //            System.out.println("위도 텍스트로 바꾸면 어떻게 가지고 오냐 "+latlong[0]);
-            double lat = Double.parseDouble(latlong[0]);
-            double lon = Double.parseDouble(latlong[1]);
+            double lat = Double.parseDouble(((MapActivity)MapActivity.mapActivity).endX);
+            double lon = Double.parseDouble(((MapActivity)MapActivity.mapActivity).endY);
 //            System.out.println("위도 텍스트로 바꾸면 어떻게 가지고 오냐 "+lat);
 //            System.out.println("경도 텍스트로 바꾸면 어떻게 가지고 오냐 "+lon);
 
@@ -274,8 +308,8 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
             networkTask.execute();
 
             //검색한 좌표로 카메라 이동
-            CameraUpdate cameraUpdate = CameraUpdate.scrollTo(endPoint);
-            naverMap.moveCamera(cameraUpdate);
+            //CameraUpdate cameraUpdate = CameraUpdate.scrollTo(endPoint);
+            //naverMap.moveCamera(cameraUpdate);
         }
     }
 

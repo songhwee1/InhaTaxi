@@ -75,7 +75,7 @@ public class DriverComingActivity extends AppCompatActivity {
                     Log.d("rsc","hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh1323513");
 
                     Log.i("keyssssss", issue.child("status").getValue().toString());
-                    if(issue.child("status").getValue().toString().equals("come")){
+                    if(issue.child("status").getValue().toString().equals("ride")){
                         Intent intent = new Intent(DriverComingActivity.this, RidingMapActivity.class);
                         startActivity(intent);
                         finish();
