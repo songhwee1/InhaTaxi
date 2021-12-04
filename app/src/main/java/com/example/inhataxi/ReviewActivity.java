@@ -2,6 +2,7 @@ package com.example.inhataxi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,10 +14,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+
+import static android.content.ContentValues.TAG;
 
 public class ReviewActivity extends AppCompatActivity {
 
@@ -79,11 +86,32 @@ public class ReviewActivity extends AppCompatActivity {
                 //리뷰가 감사하다는 토스트 메세지 출력
                 Toast.makeText(ReviewActivity.this, "Thank you for writing the review.",
                         Toast.LENGTH_SHORT).show();
-
+                cancelReservation();
                 Intent intent = new Intent(ReviewActivity.this, MapActivity.class);
                 startActivity(intent);
                 finish();
 
+            }
+            private void cancelReservation() {
+                phone = mAuth.getCurrentUser().getEmail();
+                phone = phone.substring(0, 11);
+
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                Query query = ref.child("res").orderByChild("phone").equalTo(phone);
+
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot appleSnapshot : dataSnapshot.getChildren()) {
+                            appleSnapshot.getRef().removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.e(TAG, "onCancelled", databaseError.toException());
+                    }
+                });
             }
 
         });

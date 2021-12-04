@@ -40,7 +40,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -106,7 +105,7 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
                 for (DataSnapshot issue : snapshot.getChildren()) {
 
                     Log.i("keyssssss", issue.child("status").getValue().toString());
-                    if(issue.child("status").getValue().toString().equals("ride")){
+                    if(issue.child("status").getValue().toString().equals("out")){
                         Intent intent = new Intent(RidingMapActivity.this, ReviewActivity.class);
                         startActivity(intent);
                         finish();

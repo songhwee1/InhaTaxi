@@ -113,7 +113,7 @@ public class DriverActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    deleteStatus(myAdapter_3.getItem(position));
+                                    changeStatus(myAdapter_2.getItem(position),"out");
                                 }
                             }
                         });
