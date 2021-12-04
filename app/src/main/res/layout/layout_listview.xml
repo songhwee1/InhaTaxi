@@ -22,7 +22,7 @@
 
 
             <TextView
-                android:id="@+id/movieName"
+                android:id="@+id/start"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/grade"
+                android:id="@+id/end"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

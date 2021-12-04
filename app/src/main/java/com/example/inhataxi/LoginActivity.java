@@ -25,34 +25,29 @@ import com.google.firebase.auth.FirebaseAuth;
 import static android.content.ContentValues.TAG;
 
 public class LoginActivity extends AppCompatActivity {
-    // Hwi
+
     // initialize Authentication
     private FirebaseAuth mAuth;
-
     EditText Phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Hwi
+
         // Get Auth Instance
         mAuth = FirebaseAuth.getInstance();
 
-        // Hwi
         // Button components
         Button DoLogin = (Button) findViewById(R.id.btnDoLogin);
         Button GoRegister = (Button) findViewById(R.id.btnGoRegister);
         Button GoRegister2 = (Button) findViewById(R.id.btnGoRegister2);
 
-
-        // Hwi
         // EditText components
         Phone = (EditText) findViewById(R.id.edtUserPhone) ;
 
-
-        // Hwi
         // 관리자 승인시 로그인 성공
         DoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-
-    // Hwi
     // Login Method
     private void signIn() {
         Log.d(TAG, "signIn");
@@ -98,9 +88,8 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signIn:onComplete:" + task.isSuccessful());
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Login Success! - 승객",
+                            Toast.makeText(LoginActivity.this, "탑승자 로그인 성공!",
                                     Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MapActivity.class);
                             intent.putExtra("phone",phone1);
@@ -120,14 +109,13 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signIn:onComplete:" + task.isSuccessful());
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Login Success! - 기사",
+                            Toast.makeText(LoginActivity.this, "기사 로그인 성공!",
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, DriverActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(LoginActivity.this, "You are not registered.",
+                            Toast.makeText(LoginActivity.this, "가입되지 않은 사용자 입니다.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -137,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validateForm() {
         boolean result = true;
         if (TextUtils.isEmpty(Phone.getText().toString())) {
-            Toast.makeText(LoginActivity.this, "Please enter your phone number.",
+            Toast.makeText(LoginActivity.this, "휴대폰 번호를 입력해주세요.",
                     Toast.LENGTH_SHORT).show();
             result = false;
         }

@@ -14,9 +14,6 @@ public class RequestHttpURLConnection {
 
     public String request(String _url, ContentValues _params){
 
-
-
-
         // HttpURLConnection 참조 변수.
         HttpURLConnection urlConn = null;
         // URL 뒤에 붙여서 보낼 파라미터.

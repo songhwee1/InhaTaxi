@@ -38,12 +38,7 @@ import static android.content.ContentValues.TAG;
 
 public class JoinActivity extends AppCompatActivity {
 
-    // Hwi
-    // initialize DB
     DatabaseReference mDatabase;
-
-    // Hwi
-    // initialize for Upload Image
     private Uri filePath;
     private ImageView ivPreview;
     String get_phone;
@@ -56,43 +51,30 @@ public class JoinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
 
-        // Hwi
-        // Button components
         Button DoRegister = (Button) findViewById(R.id.btnDoRegister);
         Button btnUpload = (Button) findViewById(R.id.btnUpload);
-        // Hwi
-        // EditText components
+
         final EditText name = (EditText) findViewById(R.id.edtUserName);
         final EditText phone = (EditText) findViewById(R.id.edtUserPhone);
 
-        // Hwi
-        // Image components
         ivPreview = (ImageView) findViewById(R.id.iv_preview);
 
-        // Hwi
-        // 'Register' 버튼 클릭 시 로그인 화면으로 이동
-        // "관리자 승인 후 알려드릴게요" 토스트 메세지 띄움
         DoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // hwi
-                // Convert EditText to String
                 String get_name= name.getText().toString();
                 get_phone= phone.getText().toString();
 
-                // Send UserData to DB
                 HashMap result = new HashMap<>();
                 result.put("name", get_name);
                 result.put("phone", get_phone);
 
-                // Hwi
                 // firebase 정의
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("test").child("subtest").push().setValue(result);
+                mDatabase.child("user").push().setValue(result);
                 uploadFile();
-                // Hwi
                 // Make Toast
-                Toast.makeText(JoinActivity.this, "I'll let you know after the administrator approves it.",
+                Toast.makeText(JoinActivity.this, "관리자 승인 후 로그인이 가능합니다. 최대 5일정도 소요됩니다.",
                         Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -100,7 +82,6 @@ public class JoinActivity extends AppCompatActivity {
             }
         });
 
-        // Hwi
         // Image Upload Button
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +95,6 @@ public class JoinActivity extends AppCompatActivity {
         });
     }
 
-    // Hwi
     // Image Upload
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -133,7 +113,6 @@ public class JoinActivity extends AppCompatActivity {
         }
     }
 
-    // Hwi
     // upload the file
     private void uploadFile() {
         // 업로드할 파일이 있으면 수행
@@ -151,7 +130,7 @@ public class JoinActivity extends AppCompatActivity {
             Date now = new Date();
             String filename = formatter.format(now) + ".png";
             // storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://anywhere-6df10.appspot.com/").child("images/" + filename);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://taxi260-65459.appspot.com/").child("images/" + filename);
             // 올라가거라...
             storageRef.putFile(filePath)
                     //성공시
@@ -159,7 +138,6 @@ public class JoinActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
-                            //Toast.makeText(getApplicationContext(), "Upload Success!", Toast.LENGTH_SHORT).show();
                         }
                     })
                     // 실패시
@@ -167,7 +145,6 @@ public class JoinActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            //Toast.makeText(getApplicationContext(), "Upload Failed!", Toast.LENGTH_SHORT).show();
                         }
                     })
                     // 진행중

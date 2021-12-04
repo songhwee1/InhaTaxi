@@ -63,7 +63,7 @@ public class SwipeDismissTouchListener implements View.OnTouchListener {
     private float mTranslationX;
 
     /**
-     * The callback interface used by {@link com.inhatc.anywhere.SwipeDismissTouchListener} to inform its client
+     * The callback interface used by {@link com.example.inhataxi.SwipeDismissTouchListener} to inform its client
      * about a successful dismissal of the view for which it was created.
      */
     public interface DismissCallbacks {

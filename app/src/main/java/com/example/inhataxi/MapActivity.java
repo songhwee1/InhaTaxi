@@ -96,7 +96,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onStart() {
         super.onStart();
-        System.out.println("여기는 스타트");
     }
 
     @Override
@@ -123,37 +122,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         naverMap.setLocationSource(locationSource);
         //위치 추적 모드 지정 가능 내 위치로 이동
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-//        //현재위치 버튼 사용가능
+        //현재위치 버튼 사용가능
         naverMap.getUiSettings().setLocationButtonEnabled(true);
         LatLng initialPosition = new LatLng(37.448167086033614, 126.65800409772275);
         CameraUpdate cameraUpdate = CameraUpdate.scrollTo(initialPosition);
-        //
-
 
         naverMap.moveCamera(cameraUpdate);
-//        얘가 문제다 이 코드때문에 계속 화면이 갱신되고 있다.
         ActivityCompat.requestPermissions(this, PERMISSIONS, 1000);
-
-
-//        PolylineOverlay polylineOverlay = new PolylineOverlay();
-//
-//        ArrayList<LatLng> polyarray = new ArrayList<LatLng>();
-//        LatLng startPosition = new LatLng(37.4847422, 126.968773);
-//        LatLng endPosition = new LatLng(37.4857433, 126.9723668);
-//        polyarray.add(startPosition);
-//        polyarray.add(endPosition);
-//        polylineOverlay.setCoords(polyarray);
-//        polylineOverlay.setMap(naverMap);
 
         // 카메라 이동 되면 호출 되는 이벤트
         naverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(int reason, boolean animated) {
-
-
             }
         });
-
 
         // 버튼 이벤트
         //검색을 하면 검색한 좌표에 마커를 찍어준다.
@@ -192,16 +174,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-
-
     // 현재 카메라가 보고있는 위치
     public LatLng getCurrentPosition(NaverMap naverMap) {
         CameraPosition cameraPosition = naverMap.getCameraPosition();
         return new LatLng(cameraPosition.target.latitude, cameraPosition.target.longitude);
     }
-
-
-
 
     //TMap자동차 경로를 검색해주는 메서드
     //출발좌표와 도착 좌표를 입력하여 자동차길찾기가 가능하다
@@ -209,10 +186,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         String url = null;
 
-
         try {
             String appKey = "l7xx17fd8ae850af4178a145f962daefe798";
-
 
             startX = new Double(startPoint.longitude).toString();
             startY = new Double(startPoint.latitude).toString();
@@ -226,17 +201,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     + "&startX=" + startX + "&startY=" + startY + "&endX=" + endX + "&endY=" + endY
                     + "&startName=" + startName + "&endName=" + endName;
 
-
-
         } catch ( UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-
         return url;
     }
-
-
 
     //맵검색을 비동기 식으로 처리한다.
     public class MapSearchTask extends AsyncTask<Void, Void, String>{
@@ -278,16 +248,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
             String[] latlong = result.split(",");
-//            System.out.println("위도 텍스트로 바꾸면 어떻게 가지고 오냐 "+latlong[0]);
             double lat = Double.parseDouble(latlong[0]);
             double lon = Double.parseDouble(latlong[1]);
-//            System.out.println("위도 텍스트로 바꾸면 어떻게 가지고 오냐 "+lat);
-//            System.out.println("경도 텍스트로 바꾸면 어떻게 가지고 오냐 "+lon);
-
 
             //검색한 좌표를 만들어준다
             LatLng endPoint = new LatLng(lat, lon);
-
 
             // 마커 생성
             Marker marker = new Marker();
@@ -295,18 +260,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             // 마커 추가
             marker.setMap(naverMap);
 
-
-
             //현재위치를 가지고 온다
             GpsTracker gpsTracker = new GpsTracker(MapActivity.this);
             double currentLatitude = gpsTracker.getLatitude();
             double currentLongitude = gpsTracker.getLongitude();
 
             LatLng startPoint = new LatLng(currentLatitude,currentLongitude);
-
-            //현재 보고있는 화면의 중심을 기준으로 좌표를 만들어주는 메서드
-            //LatLng startPoint=getCurrentPosition(naverMap);
-
 
             //검색한 좌표와 현재 위치를 넣어서 url을 가지고 온다.
             String url=TMapWalkerTrackerURL(startPoint, endPoint);
@@ -320,7 +279,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             naverMap.moveCamera(cameraUpdate);
         }
     }
-
 
     //URL을 가지고 검색하는 스레드
     public class NetworkTask extends AsyncTask<Void, Void, String> {
@@ -383,11 +341,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                         JSONArray coordinatesArray = geometry.getJSONArray("coordinates");
 
-//                        System.out.println("라인이 여러개다"+coordinatesArray);
 
                         for(int j=0; j<coordinatesArray.length(); j++){
-
-//                            System.out.println(coordinatesArray.get(j).getClass().getName());
 
                             JSONArray pointArray = (JSONArray) coordinatesArray.get(j);
                             double longitude =Double.parseDouble(pointArray.get(0).toString());
@@ -395,8 +350,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                             latLngArrayList.add(new LatLng(latitude, longitude));
                             System.out.println("LineString를 저장 ");
-//                            System.out.println("만들어진 어레이는  "+latLngArrayList);
-//                            System.out.println("총저장된 경로의 갯수는"+latLngArrayList.size());
                         }
                     }
 
@@ -405,12 +358,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         try{
                             double totalDistance = Integer.parseInt(properties.getString("totalDistance"));
 
-
                             totalDistanceText.setText("총 거리 :"+totalDistance/1000+" km");
 
                             int totalTime = Integer.parseInt(properties.getString("totalTime"));
                             totalTimeText.setText("총 거리 :"+ totalTime/60+"분");
-
 
                         }catch (Exception e){
 
@@ -418,11 +369,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                         String pointType = properties.getString("pointType");
 
-
                         double longitude =  Double.parseDouble(geometry.getJSONArray("coordinates").get(0).toString());
                         double latitude =  Double.parseDouble(geometry.getJSONArray("coordinates").get(1).toString());
-//                        System.out.println("Point를 저장 ");
-//                        latLngArrayList.add(new LatLng(latitude, longitude));
 
                         if(pointType.equals("SP")){
                             System.out.println("시작지점이다");
@@ -437,9 +385,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             System.out.println("끝지점이다");
 
                         }
-//                        marker.setPosition(new LatLng(latitude, longitude));
-//                        System.out.println(latitude+","+longitude);
-//                        marker.setMap(naverMap);
                     }
 
                     System.out.println("총저장된 경로의 갯수는"+latLngArrayList.size());

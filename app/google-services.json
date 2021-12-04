@@ -1,92 +1,34 @@
 {
   "project_info": {
-    "project_number": "134991041400",
-    "firebase_url": "https://anywhere-6df10-default-rtdb.firebaseio.com",
-    "project_id": "anywhere-6df10",
-    "storage_bucket": "anywhere-6df10.appspot.com"
+    "project_number": "267749469302",
+    "firebase_url": "https://taxi260-65459-default-rtdb.firebaseio.com",
+    "project_id": "taxi260-65459",
+    "storage_bucket": "taxi260-65459.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:134991041400:android:56894b93098e666839ee8d",
+        "mobilesdk_app_id": "1:267749469302:android:ef6bfe3c3e49e303928357",
         "android_client_info": {
           "package_name": "com.example.inhataxi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+          "client_id": "267749469302-htqt4rfimu8i45b4ll1lthevv0nv9mif.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAKTF-UIBBK2A1Rgx-Yz7l_RAURibtx1PQ"
+          "current_key": "AIzaSyAWIb4SSecSSVNWfBAdsoKfKbSx7vWb7X0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:134991041400:android:21f29ba74aed925639ee8d",
-        "android_client_info": {
-          "package_name": "com.inhatc.anywhere"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAKTF-UIBBK2A1Rgx-Yz7l_RAURibtx1PQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:134991041400:android:c2c635cfa1d68cde39ee8d",
-        "android_client_info": {
-          "package_name": "com.inhatc.anywhere_driver"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAKTF-UIBBK2A1Rgx-Yz7l_RAURibtx1PQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "134991041400-ouerruht3o374elj43ragv300ii4src3.apps.googleusercontent.com",
+              "client_id": "267749469302-htqt4rfimu8i45b4ll1lthevv0nv9mif.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

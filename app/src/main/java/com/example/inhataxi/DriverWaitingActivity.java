@@ -25,11 +25,8 @@ import static android.content.ContentValues.TAG;
 public class DriverWaitingActivity extends AppCompatActivity {
 
     Button doCancel;
-
     Dialog cancelDialog;
-
     private FirebaseAuth mAuth;
-
     String phone;
 
     @Override
@@ -40,7 +37,6 @@ public class DriverWaitingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_driverwating);
         mAuth = FirebaseAuth.getInstance();
 
-
         doCancel = (Button) findViewById(R.id.btnCancelResv);
 
         Intent intent = getIntent();
@@ -49,7 +45,6 @@ public class DriverWaitingActivity extends AppCompatActivity {
         TextView txtDepart = (TextView) findViewById(R.id.txtDepart);
         TextView txtArrive = (TextView) findViewById(R.id.txtArrive);
 
-        //ReservationActivity.java에서 보낸 변수로 바꿔주기
         String depart = intent.getStringExtra("start");
         String arrive = intent.getStringExtra("end");
 
@@ -57,9 +52,6 @@ public class DriverWaitingActivity extends AppCompatActivity {
         txtArrive.setText(arrive);
 
         rideStatusChange( depart, arrive);
-
-        // Minjae
-        // dialog
 
         cancelDialog = new Dialog(DriverWaitingActivity.this);
         cancelDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -75,7 +67,6 @@ public class DriverWaitingActivity extends AppCompatActivity {
 
     }
 
-    //sm
     //dialog를 띄어주는 함수
     public void showDialog() {
         cancelDialog.show();
@@ -95,7 +86,8 @@ public class DriverWaitingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 cancelReservation();
                 cancelDialog.dismiss();
-                finish();
+                Intent intent = new Intent(DriverWaitingActivity.this, MapActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -125,19 +117,13 @@ public class DriverWaitingActivity extends AppCompatActivity {
     private void rideStatusChange(String depart, String arrive) {
         phone = mAuth.getCurrentUser().getEmail();
         phone = phone.substring(0, 11);
-        Log.i("NOW PHONE : ", phone);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        Log.d("rsc","start log");
         Query query = reference.child("res").orderByChild("phone").equalTo(phone);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot issue : snapshot.getChildren()) {
-                    Log.i("IN THE NOW PHONE : ", phone);
-                    Log.d("rsc","hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh1323513");
-
-                    Log.i("keyssssss", issue.child("status").getValue().toString());
                     if(issue.child("status").getValue().toString().equals("come")){
                         Intent intent = new Intent(DriverWaitingActivity.this, DriverComingActivity.class);
                         intent.putExtra("depart", depart);
@@ -145,24 +131,6 @@ public class DriverWaitingActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-//                    Query query_status = issue.getRef().child("status").equalTo("wait");
-//                    query_status.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            for (DataSnapshot issue : snapshot.getChildren()) {
-//                                Log.d("rsc","hhhhhhhhh");
-//                                Intent intent = new Intent(MyPageActivity.this, MyPageRideActivity.class);
-//                                startActivity(intent);
-//                                finish();
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
                 }
             }
 

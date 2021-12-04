@@ -62,8 +62,8 @@ public class DriverActivity extends AppCompatActivity {
         mListView_res.setAdapter(myAdapter_1);
         mListView_come.setAdapter(myAdapter_2);
         mListView_on.setAdapter(myAdapter_3);
-        // Hwi
-        // 오는중
+        
+        // 승차대기
         SwipeDismissListViewTouchListener touchListener_1 =
                 new SwipeDismissListViewTouchListener(mListView_res,
                         new SwipeDismissListViewTouchListener.DismissCallbacks() {
@@ -75,7 +75,6 @@ public class DriverActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    //insertStatus(myAdapter_1.getItem(position),"ride");
                                     getCarNo();
                                     changeStatus(myAdapter_1.getItem(position),"come");
 
@@ -94,13 +93,12 @@ public class DriverActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListView listView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    //insertStatus(myAdapter_1.getItem(position),"ride");
                                     changeStatus(myAdapter_2.getItem(position),"ride");
 
                                 }
                             }
                         });
-        // Hwi
+
         // 하차처리
         SwipeDismissListViewTouchListener touchListener_3=
                 new SwipeDismissListViewTouchListener(mListView_on,
@@ -126,22 +124,6 @@ public class DriverActivity extends AppCompatActivity {
         mListView_on.setOnScrollListener(touchListener_3.makeScrollListener());
     }
 
-/*
-    // Hwi
-    // 상태 변경
-    private void insertStatus(SampleData data, String status){
-        phone = data.getPhone();
-        start = data.getStart();
-        end = data.getEnd();
-        HashMap result = new HashMap<>();
-        result.put("end", end);
-        result.put("phone", phone);
-        result.put("start", start);
-        // firebase 정의
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child(status).push().setValue(result);
-    }
- */
     private void getCarNo(){
         phone = mAuth.getCurrentUser().getEmail();
         phone = phone.substring(0,11);
@@ -153,7 +135,7 @@ public class DriverActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
                     carNo = appleSnapshot.child("carNo").getValue().toString();
-                    finish();
+
                 }
             }
 
@@ -163,6 +145,7 @@ public class DriverActivity extends AppCompatActivity {
             }
         });
     }
+
     private void changeStatus(SampleData data, String status){
         phone = data.getPhone();
         start = data.getStart();
@@ -177,29 +160,6 @@ public class DriverActivity extends AppCompatActivity {
                 for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
                     appleSnapshot.getRef().child("status").setValue(status);
                     appleSnapshot.getRef().child("carNo").setValue(carNo);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled", databaseError.toException());
-            }
-        });
-    }
-
-    private void deleteStatus(SampleData data){
-        phone = data.getPhone();
-        start = data.getStart();
-        end = data.getEnd();
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        Query query = ref.child("res").orderByChild("phone").equalTo(phone);
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
-                    appleSnapshot.getRef().removeValue();
                 }
             }
 

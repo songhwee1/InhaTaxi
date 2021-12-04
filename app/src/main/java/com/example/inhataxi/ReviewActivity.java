@@ -42,7 +42,6 @@ public class ReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
 
-        //sm
         //폰번호랑 별점이랑 리뷰 저장
 
         //현재 사용자 정보 가져오기
@@ -55,7 +54,6 @@ public class ReviewActivity extends AppCompatActivity {
         TextView txtComment = (TextView)findViewById(R.id.txtComment);
         RatingBar reviewScore = findViewById(R.id.reviewScore);
 
-        //js
         //레이팅바의 변화
         reviewScore.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -64,7 +62,6 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
-        //sm
         //review 버튼 클릭시
         btnReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +81,7 @@ public class ReviewActivity extends AppCompatActivity {
                 mDatabase.child("review").push().setValue(result);
 
                 //리뷰가 감사하다는 토스트 메세지 출력
-                Toast.makeText(ReviewActivity.this, "Thank you for writing the review.",
+                Toast.makeText(ReviewActivity.this, "리뷰를 작성해주셔서 감사합니다.",
                         Toast.LENGTH_SHORT).show();
                 cancelReservation();
                 Intent intent = new Intent(ReviewActivity.this, MapActivity.class);

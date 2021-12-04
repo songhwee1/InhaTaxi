@@ -1,7 +1,6 @@
 package com.example.inhataxi;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +41,11 @@ public class MyAdapter extends BaseAdapter {
     public View getView(int position, View converView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.layout_listview, null);
 
-        TextView movieName = (TextView)view.findViewById(R.id.movieName);
-        TextView grade = (TextView)view.findViewById(R.id.grade);
+        TextView start = (TextView)view.findViewById(R.id.start);
+        TextView end = (TextView)view.findViewById(R.id.end);
 
-        movieName.setText(sample.get(position).getStart());
-        if(movieName.getText().toString().equals("9200")){
-            movieName.setTextColor(Color.parseColor("#FF0000"));
-        }
-        grade.setText(sample.get(position).getEnd());
+        start.setText(sample.get(position).getStart());
+        end.setText(sample.get(position).getEnd());
 
         return view;
     }
