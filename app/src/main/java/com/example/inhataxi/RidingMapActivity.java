@@ -172,10 +172,10 @@ public class RidingMapActivity extends AppCompatActivity implements OnMapReadyCa
 
             Intent intent = getIntent();
 
-            String startX =intent.getStringExtra("startX");
-            String startY = intent.getStringExtra("startY");
-            String endX = intent.getStringExtra("endX");
-            String endY =intent.getStringExtra("endY");
+            String startX = ((MapActivity)MapActivity.mapActivity).startX;
+            String startY = ((MapActivity)MapActivity.mapActivity).startY;
+            String endX = ((MapActivity)MapActivity.mapActivity).endX;
+            String endY = ((MapActivity)MapActivity.mapActivity).endY;
 
             String startName = URLEncoder.encode("출발지", "UTF-8");
 

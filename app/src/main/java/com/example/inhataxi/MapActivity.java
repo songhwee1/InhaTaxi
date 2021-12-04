@@ -2,6 +2,7 @@ package com.example.inhataxi;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -59,13 +60,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     Button CallTaxi;
     private FirebaseAuth mAuth;
     DatabaseReference mDatabase;
+    String startX;
+    String startY;
+    String endX;
+    String endY;
 
+    static Context mapActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
+        mapActivity= this;
         editText = findViewById(R.id.editText);
         Button = findViewById(R.id.button);
         CallTaxi = findViewById(R.id.callTaxi);
@@ -208,17 +214,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             String appKey = "l7xx17fd8ae850af4178a145f962daefe798";
 
 
-            String startX = new Double(startPoint.longitude).toString();
-            String startY = new Double(startPoint.latitude).toString();
-            String endX = new Double(endPoint.longitude).toString();
-            String endY = new Double(endPoint.latitude).toString();
-
-            Intent intent = new Intent(MapActivity.this, RidingMapActivity.class);
-            intent.putExtra("endX", endX);
-            intent.putExtra("endY", endY);
-            intent.putExtra("startX", startX);
-            intent.putExtra("startY", startY);
-            startActivity(intent);
+            startX = new Double(startPoint.longitude).toString();
+            startY = new Double(startPoint.latitude).toString();
+            endX = new Double(endPoint.longitude).toString();
+            endY = new Double(endPoint.latitude).toString();
 
             String startName = URLEncoder.encode("출발지", "UTF-8");
 
