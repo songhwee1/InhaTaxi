@@ -1,11 +1,13 @@
 package com.example.inhataxi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +35,7 @@ public class DriverComingActivity extends AppCompatActivity {
 
         carNo = (TextView) findViewById(R.id.txtCarNo);
         getCarNo();
+        rideStatusChange();
     }
 
         private void getCarNo() {
@@ -56,4 +59,52 @@ public class DriverComingActivity extends AppCompatActivity {
                 }
             });
         }
+    private void rideStatusChange() {
+        phone = mAuth.getCurrentUser().getEmail();
+        phone = phone.substring(0, 11);
+        Log.i("NOW PHONE : ", phone);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        Log.d("rsc","start log");
+        Query query = reference.child("res").orderByChild("phone").equalTo(phone);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot issue : snapshot.getChildren()) {
+                    Log.i("IN THE NOW PHONE : ", phone);
+                    Log.d("rsc","hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh1323513");
+
+                    Log.i("keyssssss", issue.child("status").getValue().toString());
+                    if(issue.child("status").getValue().toString().equals("come")){
+                        Intent intent = new Intent(DriverComingActivity.this, RidingMapActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+//                    Query query_status = issue.getRef().child("status").equalTo("wait");
+//                    query_status.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            for (DataSnapshot issue : snapshot.getChildren()) {
+//                                Log.d("rsc","hhhhhhhhh");
+//                                Intent intent = new Intent(MyPageActivity.this, MyPageRideActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//
+//                        }
+//                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     }
