@@ -116,10 +116,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //네이버 맵에 locationSource를 셋하면 위치 추적 기능을 사용 할 수 있다
         naverMap.setLocationSource(locationSource);
         //위치 추적 모드 지정 가능 내 위치로 이동
-//        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 //        //현재위치 버튼 사용가능
         naverMap.getUiSettings().setLocationButtonEnabled(true);
-        LatLng initialPosition = new LatLng(37.506855, 127.066242);
+        LatLng initialPosition = new LatLng(37.448167086033614, 126.65800409772275);
         CameraUpdate cameraUpdate = CameraUpdate.scrollTo(initialPosition);
         //
 
@@ -212,6 +212,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             String startY = new Double(startPoint.latitude).toString();
             String endX = new Double(endPoint.longitude).toString();
             String endY = new Double(endPoint.latitude).toString();
+
+            Intent intent = new Intent(MapActivity.this, RidingMapActivity.class);
+            intent.putExtra("endX", endX);
+            intent.putExtra("endY", endY);
+            intent.putExtra("startX", startX);
+            intent.putExtra("startY", startY);
+            startActivity(intent);
 
             String startName = URLEncoder.encode("출발지", "UTF-8");
 
